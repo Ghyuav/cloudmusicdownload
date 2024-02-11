@@ -44,6 +44,12 @@ def main(id,path=0):
         img_url = contents[3]
         save_name = f'{title} - {artist}'.replace('/',' ')
 
+        logger.info(f'''
+-----歌曲信息-----
+歌曲名:{title}
+作曲家:{artist}
+专辑:{album}''')
+
         # 获取文件
         if path: # 传入路径
             copy(path,'output\\'+path.split('\\')[-1])
@@ -77,13 +83,7 @@ def main(id,path=0):
         logger.info('下载封面')
         data = get(img_url).content
         logger.success('封面下载成功')
-        
 
-        logger.info(f'''
------歌曲信息-----
-歌曲名:{title}
-作曲家:{artist}
-专辑:{album}''')
         logger.info('写入信息')
         write_tags(save_name,title,artist,album,data)
         logger.success('成功:'+'output\\'+save_name+'.mp3')
